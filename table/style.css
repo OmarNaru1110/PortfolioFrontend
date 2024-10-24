@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'inter', sans-serif;
+}
+*::selection{
+    background-color: #0D73771A;
+    color: #0D7377;
+}
+a {
+    text-decoration: none;
+}
+body{
+    background: linear-gradient(145deg, rgba(246,246,246,1) 0%, rgba(213,227,228,1) 100%);
+    background-attachment: fixed;
+}
+
+.container {
+    width: 80%;
+    margin:  100px auto;
+    display: flex;
+    flex-direction: column; /* Set the direction to column */
+}
+h1 {
+    text-align: start;
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(145deg, #969699, #1E1E22 45%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+table {
+    margin-top: 56px;
+    width: 100%;
+    border-collapse: collapse;
+}
+thead {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1E1E22;
+}
+.year {
+    font-size: 18px;
+    font-weight: 300;
+    color: #1E1E22;
+}
+td {
+    border-bottom: 2px solid #919194;
+    padding: 10px;
+}
+.title, a {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1E1E22;
+}
+.tag-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px 10px; 
+}
+
+.tag {
+    background-color: #0D73771A;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 15px;
+    color: #0D7377;
+    user-select: none;
+}
+button {
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+    margin:2px;
+}
+.btn-delete {
+    background-color: red;
+}
+.btn-edit {
+    background-color: #9236d0;
+}
+.btn-add {
+    width: 100%;
+    margin-top: 56px;
+    background-color: #4476ff;
+}
+.tag, button {
+    padding: 6px 10px;
+}
+
+.action-container {
+    background: linear-gradient(145deg, rgba(246,246,246,1) 0%, rgba(213,227,228,1) 100%);
+    background-attachment: fixed;
+    width: 40%;
+    margin: 10% auto;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 30%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position */
+}
+.action-container h1 {
+    margin-bottom: 10px;
+}
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+.tech-tag {
+    background-color: #0D73771A;
+    color: #0D7377;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.project-img-cell img {
+    width: 109px;
+}
+
+.btn-add, .actions-head, .project-img-cell, .btn-actions, .project-img {
+    display: none;
+}

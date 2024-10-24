@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="counter">
+            <h2 id="views-count"></h2>
+            <p>Views</p>
+        </div>
+        <div class="my-info">
+            <form action="">
+                <label for="title">Name</label>
+                <input type="text" name="name" id="name" placeholder="your name">
+                <label for="title">Title</label>
+                <input type="title" name="title" id="title" placeholder="your job title">
+                <label for="brief">Brief</label>
+                <textarea name="brief" id="brief" placeholder="your brief"></textarea>
+                <label for="about">About</label>
+                <textarea name="about" id="about" placeholder="your about"></textarea>
+                <label for="github">Github</label>
+                <input type="url" name="github" id="github" placeholder="your github">
+                <label for="linkedin">Linkedin</label>
+                <input type="url" name="linkedin" id="linkedin" placeholder="your linkedin">
+                <label for="leetcode">Leetcode</label>
+                <input type="url" name="leetcode" id="leetcode" placeholder="your leetcode">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="your email">
+                <label for="resume">Resume</label>
+                <input type="url" name="resume" id="resume" placeholder="your resume">
+                <input id="submit" type="submit">
+            </form>
+        </div>
+    </div>
+    <script src="../config.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

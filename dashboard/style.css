@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'inter', sans-serif;
+}
+*::selection{
+    background-color: #0D73771A;
+    color: #0D7377;
+}
+a {
+    text-decoration: none;
+}
+body{
+    background: linear-gradient(145deg, rgba(246,246,246,1) 0%, rgba(213,227,228,1) 100%);
+    background-attachment: fixed;
+}
+.container {
+    width: 80%;
+    height: auto; 
+    margin:  100px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 0.5fr 2fr 0.5fr;
+    gap: 0 50px;
+    display: none;
+}
+h1 {
+    text-align: start;
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(145deg, #969699, #1E1E22 45%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.container div{
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6F6F6;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.counter:hover {
+    box-shadow: 2px 1px 16.1px 1px rgba(13,115,119,0.25);
+    transform: scale(1.03);
+}
+.counter h2 {
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(145deg, #969699, #1E1E22 45%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.counter p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #5E5E63;
+}
+.my-info {
+    padding: 0px 10px;
+    grid-row-start: 2;
+    grid-row-end: -1;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+input, label{
+    display: block;
+}
+input,textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(226, 226, 226);
+}
+textarea {
+    max-width: 100%;
+}
+label{
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+input:focus{
+    outline: none;
+}
+
+input[type="submit"] {
+    margin-top: 15px;
+    background-color: #0D7377;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

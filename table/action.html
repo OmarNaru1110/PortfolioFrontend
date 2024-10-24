@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Projects</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="actionStyle.css">
+</head>
+<body>
+    <div class="action-container">
+        <form action="">
+            <label for="title">Name</label>
+            <input type="text" name="name" id="name" placeholder="project name">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" placeholder="project description"></textarea>
+            <label for="url">URL</label>
+            <input type="url" name="url" id="url" placeholder="project url">
+            <label for="img">Image</label>
+            <input type="file" name="img" id="img">
+            <label for="date">End Date</label>
+            <input type="date" name="date" id="date">
+            <label for="star">Do you want to star this project?</label>
+            <input type="checkbox" name="star" id="star">
+
+            <label for="tech-stack">Tech Stack</label>
+            <input type="text" id="tech-input" placeholder="Add a technology and press Enter">
+            <div class="tech-stack"></div>
+            
+            <input id="submit" type="submit">
+        </form>
+    </div>
+    <script src="../config.js"></script>
+    <script src="action.js"></script>
+</body>
+</html>
