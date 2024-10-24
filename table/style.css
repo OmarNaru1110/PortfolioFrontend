@@ -131,11 +131,10 @@ button {
 }
 
 @media (max-width: 768px) {
-
     .tech-header{
         display: none;
     }
-    .tag-container{
+    .tag-container-cell{
         display: none;
     }
     thead .project-img {

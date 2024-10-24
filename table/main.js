@@ -30,7 +30,7 @@ async function fetchAllProjects() {
                                 ${project.name}
                             </a>
                         </td>
-                        <td>                                    
+                        <td class="tag-container-cell">                                    
                             <div class="tag-container">
                                 ${techSpans.join('')}
                             </div>  
@@ -88,16 +88,20 @@ async function setupUI() {
     let projectImages = document.getElementsByClassName("project-img-cell");
 
     if (localStorage.accessToken){
-        // Show elements only when the access token exists
+
         addButton.style.display = "block";
         actionsHead.style.display = "table-cell";
-        imageHead.style.display = "table-cell";
         for (let i = 0; i < actionsButtons.length; i++) {
             actionsButtons[i].style.display = "table-cell";
         }
-        for (let i = 0; i < projectImages.length; i++) {
-            projectImages[i].style.display = "table-cell";
+        if(!window.matchMedia("(max-width: 768px)").matches){
+            console.log("image cell here");
+            imageHead.style.display = "table-cell";
+            for (let i = 0; i < projectImages.length; i++) {
+                projectImages[i].style.display = "table-cell";
+            }
         }
+
     }
 }
 
