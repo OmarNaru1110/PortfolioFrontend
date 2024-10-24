@@ -201,7 +201,6 @@ h3 {
     
     .left {
         width: 100%;
-        margin-bottom: 20px; /* Add space between sections on mobile */
     }
 
     .right {
@@ -212,6 +211,7 @@ h3 {
     }
     h3{
         display: block;
+        margin-top: 30px;
     }
     .full-project-container{
         margin: 0;
