@@ -138,5 +138,7 @@ button {
     .tag-container{
         display: none;
     }
-    
+    thead .project-img {
+        display: none;
+    }
 }

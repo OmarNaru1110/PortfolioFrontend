@@ -216,4 +216,7 @@ h3 {
     .full-project-container{
         margin: 0;
     }
+    .nav{
+        display: none;
+    }
 }
