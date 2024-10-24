@@ -16,7 +16,7 @@ body{
 .container {
     width: 80%;
     margin:  100px auto;
-    display: flex;
+    display: none;
     gap: 0% 10%;
 }
 .left, .right {

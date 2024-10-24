@@ -1,3 +1,5 @@
+let container = document.getElementsByClassName("container")[0];
+
 async function fetchUserDetails() {
     try {
         const userResponse = await fetch(`${domain}/api/user`, {
@@ -50,6 +52,7 @@ async function fetchUserDetails() {
     } catch (error) {
         console.error('An error occurred:', error);
     }
+    container.style.display = 'flex';
 }
 
 async function fetchStarredProjects() {
@@ -100,6 +103,7 @@ async function fetchStarredProjects() {
     } catch (error) {
         console.error('An error occurred:', error);
     }
+    container.style.display = 'flex';
 }
 fetchUserDetails();
 fetchStarredProjects();
