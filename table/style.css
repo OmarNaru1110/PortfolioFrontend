@@ -129,3 +129,14 @@ button {
 .btn-add, .actions-head, .project-img-cell, .btn-actions, .project-img {
     display: none;
 }
+
+@media (max-width: 768px) {
+
+    .tech-header{
+        display: none;
+    }
+    .tag-container{
+        display: none;
+    }
+    
+}
