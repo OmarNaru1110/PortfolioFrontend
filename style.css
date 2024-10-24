@@ -186,3 +186,42 @@ svg {
 .view-dashboard{
     display: none;
 }
+h3 {
+    font-family: "inter";
+    font-weight: 600;
+    font-size: 24px;
+    display: none;
+    color: #454549;
+    margin: 15px 0;
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .left {
+        width: 100%;
+        margin-bottom: 20px; /* Add space between sections on mobile */
+    }
+
+    .right {
+        width: 100%;
+    }
+    .about-text{
+        padding: 0;
+    }
+    h3{
+        display: block;
+    }
+    .full-project-container{
+        margin: 0;
+    }
+}
+
+/* Media queries for extra small screens */
+@media (max-width: 480px) {
+    .container {
+    }
+    
+
+}
