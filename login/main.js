@@ -18,7 +18,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
 
     if (response.ok) {
         window.localStorage.accessToken = (await response.json()).token;
-        window.open('../main/index.html', '_self');
+        window.open('../index.html', '_self');
     } else {
         console.error('Login failed', response.status);
     }
