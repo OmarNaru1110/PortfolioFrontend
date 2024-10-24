@@ -1,5 +1,8 @@
 let domain = "https://omarelnaggar.runasp.net";
 function getAccessTokenAsJson() {
+    if (!localStorage.accessToken) {
+        return null;
+    }
     const token = localStorage.accessToken;
 
     function base64UrlDecode(str) {
@@ -16,4 +19,8 @@ function getAccessTokenAsJson() {
     return JSON.parse(payload);
 }
 
-let userId = getAccessTokenAsJson().sub;
+let parsedToken = getAccessTokenAsJson();
+let userId;
+if (parsedToken) {
+    userId = parsedToken.sub;
+}
