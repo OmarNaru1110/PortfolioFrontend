@@ -217,11 +217,3 @@ h3 {
         margin: 0;
     }
 }
-
-/* Media queries for extra small screens */
-@media (max-width: 480px) {
-    .container {
-    }
-    
-
-}
