@@ -14,6 +14,7 @@ async function fetchUserDetails() {
             let userData = await userResponse.json();
             let myName = document.getElementsByClassName('my-name')[0];
             let myTitle = document.getElementsByClassName('my-title')[0];
+            console.log(myTitle);
             let myBrief = document.getElementsByClassName('my-brief')[0];
             let myAbout = document.getElementById("about");
             let myGithub = document.getElementById("github");
