@@ -111,7 +111,7 @@ submit.addEventListener('click', async (e) => {
         });
         if (response.ok) {
             console.log(response);
-            window.open('../main/index.html', '_self');
+            window.open('../index.html', '_self');
         } else {
             console.log(response);
             console.error('update failed', response.status);
