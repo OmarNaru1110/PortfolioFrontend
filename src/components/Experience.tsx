@@ -10,6 +10,7 @@ export function Experience() {
     const [experiences, setExperiences] = useState<WorkExperienceUI[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
 
     useEffect(() => {
         async function fetchExperiences() {
@@ -27,6 +28,15 @@ export function Experience() {
         }
 
         fetchExperiences();
+    }, []);
+
+    useEffect(() => {
+        function handleResize() {
+            setIsLargeScreen(window.innerWidth >= 768);
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     return (
@@ -107,98 +117,131 @@ export function Experience() {
                     </p>
                 </AnimatedSection>
 
-                <div className="relative" style={{ position: 'relative' }}>
-                    {/* Timeline line */}
-                    {!loading && !error && experiences.length > 0 && (
-                        <div 
-                            style={{ 
-                                position: 'absolute',
-                                left: '50%', 
-                                top: 0,
-                                height: '100%',
-                                width: '4px',
-                                backgroundColor: '#C9A875',
-                                transform: 'translateX(-50%)'
-                            }}
-                        ></div>
-                    )}
-
-                    {loading ? (
-                        <div className="flex justify-center items-center py-12">
-                            <Loader2 className="w-8 h-8 text-[#DC143C] animate-spin" />
-                        </div>
-                    ) : error ? (
-                        <div className="text-center py-12">
-                            <p className="text-[#DC143C]">{error}</p>
-                        </div>
-                    ) : experiences.length === 0 ? (
-                        <div className="text-center py-12">
-                            <p className="text-[#6B5644]">No work experiences available.</p>
-                        </div>
-                    ) : (
-                        <div className="space-y-12 relative">
-                            {experiences.map((exp, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.2 }}
-                                className="relative flex gap-8 items-center"
-                                style={{
-                                    flexDirection: index % 2 === 0 ? 'row' : 'row-reverse'
-                                }}
-                            >
-                                {/* Timeline dot */}
+                {loading ? (
+                    <div className="flex justify-center items-center py-12">
+                        <Loader2 className="w-8 h-8 text-[#DC143C] animate-spin" />
+                    </div>
+                ) : error ? (
+                    <div className="text-center py-12">
+                        <p className="text-[#DC143C]">{error}</p>
+                    </div>
+                ) : experiences.length === 0 ? (
+                    <div className="text-center py-12">
+                        <p className="text-[#6B5644]">No work experiences available.</p>
+                    </div>
+                ) : (
+                    <>
+                        {isLargeScreen ? (
+                            // LARGE SCREEN - Timeline Design
+                            <div className="relative" style={{ position: 'relative' }}>
+                                {/* Timeline line */}
                                 <div 
-                                    className="absolute rounded-full z-10"
-                                    style={{
-                                        left: '50%',
-                                        top: '2rem',
-                                        width: '24px',
-                                        height: '24px',
-                                        backgroundColor: '#DC143C',
-                                        transform: 'translateX(-50%)',
-                                        border: 'solid #EDE0D4',
-                                        boxShadow: '0 0 0 4px #EDE0D4'
+                                    style={{ 
+                                        position: 'absolute',
+                                        left: '50%', 
+                                        top: 0,
+                                        height: '100%',
+                                        width: '4px',
+                                        backgroundColor: '#C9A875',
+                                        transform: 'translateX(-50%)'
                                     }}
                                 ></div>
 
-                                {/* Content card */}
-                                <div 
-                                    className="bg-[#F5E6D3] border-4 border-[#C9A875] rounded-lg p-6 shadow-xl hover:border-[#DC143C] transition-all"
-                                    style={{ width: '45%' }}
-                                >
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <Briefcase className="text-[#DC143C]" size={20} />
-                                                <h3 className="text-xl text-[#3D2817]">{exp.role}</h3>
-                                            </div>
-                                            <p className="text-[#DC143C] mb-1">{exp.company}</p>
+                                <div className="space-y-12 relative">
+                                    {experiences.map((exp, index) => (
+                                        <motion.div
+                                            key={index}
+                                            initial={{ opacity: 0, y: 50 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                                            className="relative flex gap-8 items-center"
+                                            style={{
+                                                flexDirection: index % 2 === 0 ? 'row' : 'row-reverse'
+                                            }}
+                                        >
+                                            {/* Timeline dot */}
+                                            <div 
+                                                className="absolute rounded-full z-10"
+                                                style={{
+                                                    left: '50%',
+                                                    top: '2rem',
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    backgroundColor: '#DC143C',
+                                                    transform: 'translateX(-50%)',
+                                                    border: 'solid #EDE0D4',
+                                                    boxShadow: '0 0 0 4px #EDE0D4'
+                                                }}
+                                            ></div>
+
+                                            {/* Content card */}
+                                            <motion.div 
+                                                className="bg-[#F5E6D3] border-4 border-[#C9A875] rounded-lg p-6 shadow-xl hover:border-[#DC143C] hover:shadow-2xl transition-colors duration-300 ease-in-out group"
+                                                style={{ width: '45%' }}
+                                                whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                            >
+                                                <div className="flex items-start justify-between mb-4">
+                                                    <div className="flex-1">
+                                                        <div className="flex items-center gap-2 mb-2">
+                                                            <Briefcase className="text-[#DC143C]" size={20} />
+                                                            <h3 className="text-xl text-[#3D2817]">{exp.role}</h3>
+                                                        </div>
+                                                        <p className="text-[#DC143C] mb-1">{exp.company}</p>
+                                                        <div className="flex items-center gap-2 text-sm text-[#6B5644]">
+                                                            <Calendar size={14} />
+                                                            <span>{exp.period}</span>
+                                                            <span>•</span>
+                                                            <span>{exp.location}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="w-16 h-1 bg-[#DC143C] mb-4"></div>
+
+                                                <p className="text-sm text-[#5C4033] leading-relaxed">
+                                                    {exp.description}
+                                                </p>
+                                            </motion.div>
+
+                                            {/* Spacer for alternating layout */}
+                                            <div style={{ width: '45%' }}></div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : (
+                            // SMALL SCREEN - Simple Stacked Design (No Timeline)
+                            <div className="space-y-6">
+                                {experiences.map((exp, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 50 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                        className="bg-[#F5E6D3] border-4 border-[#C9A875] rounded-lg p-6 shadow-xl hover:border-[#DC143C] hover:shadow-2xl transition-colors duration-300 ease-in-out group"
+                                    >
+                                        <div className="mb-4">
+                                            <h3 className="text-lg font-semibold text-[#3D2817] mb-2">{exp.role}</h3>
+                                            <p className="text-[#DC143C] font-medium mb-3">{exp.company}</p>
                                             <div className="flex items-center gap-2 text-sm text-[#6B5644]">
                                                 <Calendar size={14} />
                                                 <span>{exp.period}</span>
-                                                <span>•</span>
-                                                <span>{exp.location}</span>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div className="w-16 h-1 bg-[#DC143C] mb-4"></div>
-
-                                    <p className="text-sm text-[#5C4033] leading-relaxed">
-                                        {exp.description}
-                                    </p>
-                                </div>
-
-                                {/* Spacer for alternating layout */}
-                                <div style={{ width: '45%' }}></div>
-                            </motion.div>
-                        ))}
-                    </div>
-                    )}
-                </div>
+                                        <p className="text-sm text-[#5C4033] leading-relaxed">
+                                            {exp.description}
+                                        </p>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
         </section>
     );
