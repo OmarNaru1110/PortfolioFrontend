@@ -1,60 +1,34 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { CloudPattern } from './CloudPattern';
 import { AnimatedSection } from './AnimatedSection';
-
-const experiences = [
-    {
-        company: 'Tech Solutions Inc.',
-        role: 'Senior Backend Engineer',
-        period: '2023 - Present',
-        location: 'Remote',
-        responsibilities: [
-            'Led the development of microservices architecture serving 1M+ daily active users',
-            'Optimized database queries reducing response time by 60%',
-            'Mentored junior developers and conducted code reviews',
-            'Implemented CI/CD pipelines using Docker and Kubernetes',
-        ],
-    },
-        {
-        company: 'Tech Solutions Inc.',
-        role: 'Senior Backend Engineer',
-        period: '2023 - Present',
-        location: 'Remote',
-        responsibilities: [
-            'Led the development of microservices architecture serving 1M+ daily active users',
-            'Optimized database queries reducing response time by 60%',
-            'Mentored junior developers and conducted code reviews',
-            'Implemented CI/CD pipelines using Docker and Kubernetes',
-        ],
-    },
-    {
-        company: 'Digital Innovations Co.',
-        role: 'Backend Software Engineer',
-        period: '2021 - 2023',
-        location: 'Hybrid',
-        responsibilities: [
-            'Built RESTful APIs and GraphQL endpoints for web and mobile applications',
-            'Designed and implemented authentication and authorization systems',
-            'Collaborated with frontend teams to integrate backend services',
-            'Maintained and improved existing codebase with 95% test coverage',
-        ],
-    },
-    {
-        company: 'StartUp Labs',
-        role: 'Junior Backend Developer',
-        period: '2020 - 2021',
-        location: 'On-site',
-        responsibilities: [
-            'Developed backend features for e-commerce platform',
-            'Participated in agile development process and daily standups',
-            'Wrote unit tests and integration tests for core functionality',
-            'Assisted in deployment and monitoring of production systems',
-        ],
-    },
-];
+import { getAllWorkExperiences } from '../services/api';
+import type { WorkExperienceUI } from '../types/api';
 
 export function Experience() {
+    const [experiences, setExperiences] = useState<WorkExperienceUI[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchExperiences() {
+            try {
+                setLoading(true);
+                const data = await getAllWorkExperiences();
+                setExperiences(data);
+                setError(null);
+            } catch (err) {
+                setError('Failed to load work experiences');
+                console.error('Error fetching experiences:', err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchExperiences();
+    }, []);
+
     return (
         <section id="experience" className="py-24 bg-[#F5E6D3] relative overflow-hidden">
             {/* Decorative clouds - distributed throughout the section */}
@@ -135,20 +109,35 @@ export function Experience() {
 
                 <div className="relative" style={{ position: 'relative' }}>
                     {/* Timeline line */}
-                    <div 
-                        style={{ 
-                            position: 'absolute',
-                            left: '50%', 
-                            top: 0,
-                            height: '100%',
-                            width: '4px',
-                            backgroundColor: '#C9A875',
-                            transform: 'translateX(-50%)'
-                        }}
-                    ></div>
+                    {!loading && !error && experiences.length > 0 && (
+                        <div 
+                            style={{ 
+                                position: 'absolute',
+                                left: '50%', 
+                                top: 0,
+                                height: '100%',
+                                width: '4px',
+                                backgroundColor: '#C9A875',
+                                transform: 'translateX(-50%)'
+                            }}
+                        ></div>
+                    )}
 
-                    <div className="space-y-12 relative">
-                        {experiences.map((exp, index) => (
+                    {loading ? (
+                        <div className="flex justify-center items-center py-12">
+                            <Loader2 className="w-8 h-8 text-[#DC143C] animate-spin" />
+                        </div>
+                    ) : error ? (
+                        <div className="text-center py-12">
+                            <p className="text-[#DC143C]">{error}</p>
+                        </div>
+                    ) : experiences.length === 0 ? (
+                        <div className="text-center py-12">
+                            <p className="text-[#6B5644]">No work experiences available.</p>
+                        </div>
+                    ) : (
+                        <div className="space-y-12 relative">
+                            {experiences.map((exp, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 50 }}
@@ -198,14 +187,9 @@ export function Experience() {
 
                                     <div className="w-16 h-1 bg-[#DC143C] mb-4"></div>
 
-                                    <ul className="space-y-2">
-                                        {exp.responsibilities.map((responsibility, idx) => (
-                                            <li key={idx} className="flex gap-2 text-sm text-[#5C4033]">
-                                                <span className="text-[#DC143C] mt-1">•</span>
-                                                <span>{responsibility}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <p className="text-sm text-[#5C4033] leading-relaxed">
+                                        {exp.description}
+                                    </p>
                                 </div>
 
                                 {/* Spacer for alternating layout */}
@@ -213,6 +197,7 @@ export function Experience() {
                             </motion.div>
                         ))}
                     </div>
+                    )}
                 </div>
             </div>
         </section>

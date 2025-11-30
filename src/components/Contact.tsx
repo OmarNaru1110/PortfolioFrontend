@@ -1,8 +1,9 @@
-import { Send } from 'lucide-react';
+import { Send, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CloudPattern } from './CloudPattern';
 import { AnimatedSection } from './AnimatedSection';
+import { sendContactMessage } from '../services/api';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -10,11 +11,32 @@ export function Contact() {
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    
+    try {
+      setIsSubmitting(true);
+      setSubmitStatus('idle');
+      setErrorMessage('');
+      
+      await sendContactMessage(formData);
+      
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (err) {
+      setSubmitStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+      console.error('Error sending message:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,17 +150,50 @@ export function Contact() {
 
               <motion.button
                 type="submit"
-                className="w-full px-6 py-3 bg-[#DC143C] hover:bg-[#B01030] text-[#F5E6D3] rounded transition-colors flex items-center justify-center gap-2 border-2 border-[#8B0000] shadow-lg"
+                disabled={isSubmitting}
+                className="w-full px-6 py-3 bg-[#DC143C] hover:bg-[#B01030] text-[#F5E6D3] rounded transition-colors flex items-center justify-center gap-2 border-2 border-[#8B0000] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02, y: isSubmitting ? 0 : -2 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
               >
-                Send Message
-                <Send size={18} />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={18} />
+                  </>
+                )}
               </motion.button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 text-green-600 bg-green-50 border border-green-200 rounded p-3"
+                >
+                  <CheckCircle size={20} />
+                  <span>Message sent successfully! I'll get back to you soon.</span>
+                </motion.div>
+              )}
+
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 text-red-600 bg-red-50 border border-red-200 rounded p-3"
+                >
+                  <XCircle size={20} />
+                  <span>{errorMessage}</span>
+                </motion.div>
+              )}
             </form>
           </AnimatedSection>
         </div>

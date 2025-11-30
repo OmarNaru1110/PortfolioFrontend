@@ -1,12 +1,36 @@
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { CloudPattern } from './CloudPattern';
 import { AnimatedSection } from './AnimatedSection';
-import { featuredProjects } from '../data/projects';
+import { getStarredProjects } from '../services/api';
+import type { ProjectUI } from '../types/api';
 
 export function Projects() {
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectUI[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        setLoading(true);
+        const projects = await getStarredProjects();
+        setFeaturedProjects(projects);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load projects');
+        console.error('Error fetching projects:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProjects();
+  }, []);
+
   return (
     <section id="projects" className="py-24 bg-[#EDE0D4] relative overflow-hidden">
       {/* Decorative clouds */}
@@ -46,7 +70,20 @@ export function Projects() {
         </AnimatedSection>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
+          {loading ? (
+            <div className="col-span-full flex justify-center items-center py-12">
+              <Loader2 className="w-8 h-8 text-[#DC143C] animate-spin" />
+            </div>
+          ) : error ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-[#DC143C]">{error}</p>
+            </div>
+          ) : featuredProjects.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-[#6B5644]">No featured projects available.</p>
+            </div>
+          ) : (
+            featuredProjects.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
@@ -91,31 +128,38 @@ export function Projects() {
                 </div>
 
                 {/* Links */}
+                {(project.codeUrl && project.codeUrl !== '#') || (project.demoUrl && project.demoUrl !== '#') ? (
                 <div className="flex gap-4 pt-2 border-t-2 border-[#C9A875]">
-                  <motion.a
-                    href={project.codeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-[#5C4033] hover:text-[#DC143C] transition-colors"
-                    whileHover={{ scale: 1.05, x: 2 }}
-                  >
-                    <Github size={16} />
-                    Code
-                  </motion.a>
-                  <motion.a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-[#5C4033] hover:text-[#DC143C] transition-colors"
-                    whileHover={{ scale: 1.05, x: 2 }}
-                  >
-                    <ExternalLink size={16} />
-                    Demo
-                  </motion.a>
+                  {project.codeUrl && project.codeUrl !== '#' && (
+                    <motion.a
+                      href={project.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-[#5C4033] hover:text-[#DC143C] transition-colors"
+                      whileHover={{ scale: 1.05, x: 2 }}
+                    >
+                      <Github size={16} />
+                      Code
+                    </motion.a>
+                  )}
+                  {project.demoUrl && project.demoUrl !== '#' && (
+                    <motion.a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-[#5C4033] hover:text-[#DC143C] transition-colors"
+                      whileHover={{ scale: 1.05, x: 2 }}
+                    >
+                      <ExternalLink size={16} />
+                      Demo
+                    </motion.a>
+                  )}
                 </div>
+                ) : null}
               </div>
             </motion.div>
-          ))}
+          ))
+          )}
         </div>
 
         {/* View All Projects Button */}

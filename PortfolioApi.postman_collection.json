@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "portfolio-api-collection",
+		"name": "Portfolio API",
+		"description": "API documentation for Omar El Naggar's Portfolio Web API.\n\nBase URL: https://omarelnaggar.runasp.net\n\n## Authentication\nSome endpoints require the `X-Admin-Secret` header for authorization.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://omarelnaggar.runasp.net",
+			"type": "string"
+		},
+		{
+			"key": "adminSecret",
+			"value": "your-admin-secret-here",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Contact",
+			"description": "Contact form endpoints for sending messages",
+			"item": [
+				{
+					"name": "Send Contact Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"message\": \"Hello! I would like to get in touch with you regarding a potential collaboration.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Contact",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "Contact"]
+						},
+						"description": "Send a contact message via email.\n\n**Request Body:**\n- `name` (string, required): Sender's name (max 100 characters)\n- `email` (string, required): Sender's email address\n- `message` (string, required): Message content (max 2000 characters)\n\n**Responses:**\n- `200 OK`: Message sent successfully\n- `400 Bad Request`: Invalid input data\n- `500 Internal Server Error`: Failed to send email"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"description": "Project management endpoints",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Project/all",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "Project", "all"]
+						},
+						"description": "Get all projects.\n\n**Responses:**\n- `200 OK`: Returns list of all projects\n- `404 Not Found`: No projects found"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Starred Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Project/starred",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "Project", "starred"]
+						},
+						"description": "Get all starred/featured projects.\n\n**Responses:**\n- `200 OK`: Returns list of starred projects\n- `404 Not Found`: No starred projects found"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Admin-Secret",
+								"value": "{{adminSecret}}",
+								"description": "Admin authentication secret"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Id",
+									"value": "0",
+									"description": "Project ID (use 0 for new projects)",
+									"type": "text"
+								},
+								{
+									"key": "Name",
+									"value": "My Awesome Project",
+									"description": "Project name",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "A detailed description of the project and its features.",
+									"description": "Project description",
+									"type": "text"
+								},
+								{
+									"key": "EndDate",
+									"value": "2025-11-30",
+									"description": "Project completion date (optional)",
+									"type": "text"
+								},
+								{
+									"key": "CodeUrl",
+									"value": "https://github.com/username/project",
+									"description": "Link to source code (optional)",
+									"type": "text"
+								},
+								{
+									"key": "DemoUrl",
+									"value": "https://demo.example.com",
+									"description": "Link to live demo (optional)",
+									"type": "text"
+								},
+								{
+									"key": "Star",
+									"value": "true",
+									"description": "Whether the project is starred/featured",
+									"type": "text"
+								},
+								{
+									"key": "Technologies",
+									"value": "C#, ASP.NET Core, Entity Framework, SQL Server",
+									"description": "Technologies used (optional)",
+									"type": "text"
+								},
+								{
+									"key": "Image",
+									"description": "Project image file (optional)",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Project",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "Project"]
+						},
+						"description": "Add a new project.\n\n**Authentication Required:** `X-Admin-Secret` header\n\n**Request Body (form-data):**\n- `Id` (int): Project ID (use 0 for new)\n- `Name` (string): Project name\n- `Description` (string): Project description\n- `EndDate` (datetime, optional): Completion date\n- `CodeUrl` (string, optional): Source code URL\n- `DemoUrl` (string, optional): Live demo URL\n- `Star` (boolean): Featured project flag\n- `Technologies` (string, optional): Technologies used\n- `Image` (file, optional): Project image\n\n**Responses:**\n- `201 Created`: Project created successfully\n- `401 Unauthorized`: Invalid or missing admin secret\n- `500 Internal Server Error`: Failed to create project"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Admin-Secret",
+								"value": "{{adminSecret}}",
+								"description": "Admin authentication secret"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Id",
+									"value": "1",
+									"description": "Project ID to edit",
+									"type": "text"
+								},
+								{
+									"key": "Name",
+									"value": "Updated Project Name",
+									"description": "Project name",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Updated project description.",
+									"description": "Project description",
+									"type": "text"
+								},
+								{
+									"key": "EndDate",
+									"value": "2025-12-15",
+									"description": "Project completion date (optional)",
+									"type": "text"
+								},
+								{
+									"key": "CodeUrl",
+									"value": "https://github.com/username/project",
+									"description": "Link to source code (optional)",
+									"type": "text"
+								},
+								{
+									"key": "DemoUrl",
+									"value": "https://demo.example.com",
+									"description": "Link to live demo (optional)",
+									"type": "text"
+								},
+								{
+									"key": "Star",
+									"value": "false",
+									"description": "Whether the project is starred/featured",
+									"type": "text"
+								},
+								{
+									"key": "Technologies",
+									"value": "React, TypeScript, Node.js",
+									"description": "Technologies used (optional)",
+									"type": "text"
+								},
+								{
+									"key": "Image",
+									"description": "Project image file (optional)",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Project",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "Project"]
+						},
+						"description": "Edit an existing project.\n\n**Authentication Required:** `X-Admin-Secret` header\n\n**Request Body (form-data):**\n- `Id` (int, required): Project ID to edit\n- `Name` (string): Project name\n- `Description` (string): Project description\n- `EndDate` (datetime, optional): Completion date\n- `CodeUrl` (string, optional): Source code URL\n- `DemoUrl` (string, optional): Live demo URL\n- `Star` (boolean): Featured project flag\n- `Technologies` (string, optional): Technologies used\n- `Image` (file, optional): Project image\n\n**Responses:**\n- `204 No Content`: Project updated successfully\n- `401 Unauthorized`: Invalid or missing admin secret\n- `404 Not Found`: Project not found\n- `500 Internal Server Error`: Failed to update project"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Admin-Secret",
+								"value": "{{adminSecret}}",
+								"description": "Admin authentication secret"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Project/:projectId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "Project", ":projectId"],
+							"variable": [
+								{
+									"key": "projectId",
+									"value": "1",
+									"description": "ID of the project to delete"
+								}
+							]
+						},
+						"description": "Delete a project by ID.\n\n**Authentication Required:** `X-Admin-Secret` header\n\n**Path Parameters:**\n- `projectId` (int): ID of the project to delete\n\n**Responses:**\n- `204 No Content`: Project deleted successfully\n- `401 Unauthorized`: Invalid or missing admin secret\n- `404 Not Found`: Project not found\n- `500 Internal Server Error`: Failed to delete project"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Work Experience",
+			"description": "Work experience management endpoints",
+			"item": [
+				{
+					"name": "Get All Work Experiences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/WorkExperience/all",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "WorkExperience", "all"]
+						},
+						"description": "Get all work experiences.\n\n**Responses:**\n- `200 OK`: Returns list of all work experiences\n- `500 Internal Server Error`: Failed to retrieve work experiences"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Work Experience",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Secret",
+								"value": "{{adminSecret}}",
+								"description": "Admin authentication secret"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 0,\n    \"company\": \"Tech Company Inc.\",\n    \"role\": \"Software Engineer\",\n    \"description\": \"Developed and maintained web applications using modern technologies.\",\n    \"startDate\": \"2024-01-15\",\n    \"endDate\": \"2025-06-30\",\n    \"workArrangement\": 0\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/WorkExperience/add",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "WorkExperience", "add"]
+						},
+						"description": "Add a new work experience.\n\n**Authentication Required:** `X-Admin-Secret` header\n\n**Request Body:**\n- `id` (int): Use 0 for new entries\n- `company` (string, required): Company name\n- `role` (string, required): Job title/role\n- `description` (string): Job description\n- `startDate` (datetime): Start date of employment\n- `endDate` (datetime, optional): End date (null for current position)\n- `workArrangement` (int): Work arrangement type:\n  - `0` = Onsite\n  - `1` = Hybrid\n  - `2` = Remote\n\n**Responses:**\n- `201 Created`: Work experience created successfully\n- `401 Unauthorized`: Invalid or missing admin secret\n- `500 Internal Server Error`: Failed to create work experience"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Work Experience",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Secret",
+								"value": "{{adminSecret}}",
+								"description": "Admin authentication secret"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"company\": \"Updated Company Name\",\n    \"role\": \"Senior Software Engineer\",\n    \"description\": \"Led development of microservices architecture.\",\n    \"startDate\": \"2024-01-15\",\n    \"endDate\": null,\n    \"workArrangement\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/WorkExperience/edit",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "WorkExperience", "edit"]
+						},
+						"description": "Edit an existing work experience.\n\n**Authentication Required:** `X-Admin-Secret` header\n\n**Request Body:**\n- `id` (int, required): ID of the work experience to edit\n- `company` (string, required): Company name\n- `role` (string, required): Job title/role\n- `description` (string): Job description\n- `startDate` (datetime): Start date of employment\n- `endDate` (datetime, optional): End date (null for current position)\n- `workArrangement` (int): Work arrangement type:\n  - `0` = Onsite\n  - `1` = Hybrid\n  - `2` = Remote\n\n**Responses:**\n- `200 OK`: Work experience updated successfully\n- `401 Unauthorized`: Invalid or missing admin secret\n- `404 Not Found`: Work experience not found\n- `500 Internal Server Error`: Failed to update work experience"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Work Experience",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Admin-Secret",
+								"value": "{{adminSecret}}",
+								"description": "Admin authentication secret"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/WorkExperience/delete/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "WorkExperience", "delete", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID of the work experience to delete"
+								}
+							]
+						},
+						"description": "Delete a work experience by ID.\n\n**Authentication Required:** `X-Admin-Secret` header\n\n**Path Parameters:**\n- `id` (int): ID of the work experience to delete\n\n**Responses:**\n- `200 OK`: Work experience deleted successfully\n- `401 Unauthorized`: Invalid or missing admin secret\n- `404 Not Found`: Work experience not found\n- `500 Internal Server Error`: Failed to delete work experience"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

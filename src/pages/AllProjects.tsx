@@ -1,11 +1,35 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, ArrowLeft } from 'lucide-react';
+import { ExternalLink, Github, ArrowLeft, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { projects } from '../data/projects';
+import { useEffect, useState } from 'react';
+import { getAllProjects } from '../services/api';
+import type { ProjectUI } from '../types/api';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { CloudPattern } from '../components/CloudPattern';
 
 export function AllProjects() {
+    const [projects, setProjects] = useState<ProjectUI[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchProjects() {
+            try {
+                setLoading(true);
+                const data = await getAllProjects();
+                setProjects(data);
+                setError(null);
+            } catch (err) {
+                setError('Failed to load projects');
+                console.error('Error fetching projects:', err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchProjects();
+    }, []);
+
     return (
         <div className="min-h-screen bg-[#F5E6D3] relative overflow-hidden">
             {/* Decorative elements */}
@@ -51,19 +75,32 @@ export function AllProjects() {
                 {/* Projects Table */}
                 <AnimatedSection variant="slideUp" delay={0.2}>
                     <div className="bg-[#EDE0D4] border-4 border-[#C9A875] rounded-lg shadow-2xl overflow-hidden">
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead className="bg-[#C9A875] text-[#3D2817]">
-                                    <tr>
-                                        <th className="px-6 py-4 text-left font-semibold">Project Name</th>
-                                        <th className="px-6 py-4 text-left font-semibold">Code</th>
-                                        <th className="px-6 py-4 text-left font-semibold">Demo</th>
-                                        <th className="px-6 py-4 text-left font-semibold">End Date</th>
-                                        <th className="px-6 py-4 text-left font-semibold">Technologies</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y-2 divide-[#C9A875]">
-                                    {projects.map((project, index) => (
+                        {loading ? (
+                            <div className="flex justify-center items-center py-12">
+                                <Loader2 className="w-8 h-8 text-[#DC143C] animate-spin" />
+                            </div>
+                        ) : error ? (
+                            <div className="text-center py-12">
+                                <p className="text-[#DC143C]">{error}</p>
+                            </div>
+                        ) : projects.length === 0 ? (
+                            <div className="text-center py-12">
+                                <p className="text-[#6B5644]">No projects available.</p>
+                            </div>
+                        ) : (
+                            <div className="overflow-x-auto">
+                                <table className="w-full">
+                                    <thead className="bg-[#C9A875] text-[#3D2817]">
+                                        <tr>
+                                            <th className="px-6 py-4 text-left font-semibold">Project Name</th>
+                                            <th className="px-6 py-4 text-left font-semibold">Code</th>
+                                            <th className="px-6 py-4 text-left font-semibold">Demo</th>
+                                            <th className="px-6 py-4 text-left font-semibold">End Date</th>
+                                            <th className="px-6 py-4 text-left font-semibold">Technologies</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y-2 divide-[#C9A875]">
+                                        {projects.map((project, index) => (
                                         <motion.tr
                                             key={project.id}
                                             initial={{ opacity: 0, y: 20 }}
@@ -79,26 +116,34 @@ export function AllProjects() {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <a
-                                                    href={project.codeUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
-                                                >
-                                                    <Github size={16} />
-                                                    <span className="text-sm">View Code</span>
-                                                </a>
+                                                {project.codeUrl && project.codeUrl !== '#' ? (
+                                                    <a
+                                                        href={project.codeUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
+                                                    >
+                                                        <Github size={16} />
+                                                        <span className="text-sm">View</span>
+                                                    </a>
+                                                ) : (
+                                                    <span className="text-[#6B5644] text-sm">—</span>
+                                                )}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <a
-                                                    href={project.demoUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
-                                                >
-                                                    <ExternalLink size={16} />
-                                                    <span className="text-sm">View Demo</span>
-                                                </a>
+                                                {project.demoUrl && project.demoUrl !== '#' ? (
+                                                    <a
+                                                        href={project.demoUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
+                                                    >
+                                                        <ExternalLink size={16} />
+                                                        <span className="text-sm">View</span>
+                                                    </a>
+                                                ) : (
+                                                    <span className="text-[#6B5644] text-sm">—</span>
+                                                )}
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className="text-[#5C4033]">{project.endDate}</span>
@@ -120,6 +165,7 @@ export function AllProjects() {
                                 </tbody>
                             </table>
                         </div>
+                        )}
                     </div>
                 </AnimatedSection>
             </div>
