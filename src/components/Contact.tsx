@@ -18,7 +18,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#EDE0D4] relative overflow-hidden">
+    <section id="contact" className="py-24 bg-[#F5E6D3] relative overflow-hidden">
       {/* Decorative red sun */}
       <motion.div
         className="absolute bottom-20 right-20 w-48 h-48 bg-[#DC143C] rounded-full opacity-10"

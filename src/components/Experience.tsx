@@ -56,7 +56,7 @@ const experiences = [
 
 export function Experience() {
     return (
-        <section id="experience" className="py-24 bg-[#EDE0D4] relative overflow-hidden">
+        <section id="experience" className="py-24 bg-[#F5E6D3] relative overflow-hidden">
             {/* Decorative clouds - distributed throughout the section */}
             {/* Top left cloud */}
             <motion.div

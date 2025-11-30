@@ -8,7 +8,7 @@ import { featuredProjects } from '../data/projects';
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24 bg-[#F5E6D3] relative overflow-hidden">
+    <section id="projects" className="py-24 bg-[#EDE0D4] relative overflow-hidden">
       {/* Decorative clouds */}
       <motion.div
         className="absolute top-20 left-16 text-[#C9A875] w-56 h-20 opacity-20"
