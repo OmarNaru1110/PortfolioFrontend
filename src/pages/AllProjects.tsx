@@ -6,6 +6,7 @@ import { getAllProjects } from '../services/api';
 import type { ProjectUI } from '../types/api';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { CloudPattern } from '../components/CloudPattern';
+import '../styles/ResponsiveTable.css';
 
 export function AllProjects() {
     const [projects, setProjects] = useState<ProjectUI[]>([]);
@@ -95,76 +96,76 @@ export function AllProjects() {
                                             <th className="px-6 py-4 text-left font-semibold">Project Name</th>
                                             <th className="px-6 py-4 text-left font-semibold">Code</th>
                                             <th className="px-6 py-4 text-left font-semibold">Demo</th>
-                                            <th className="px-6 py-4 text-left font-semibold">End Date</th>
-                                            <th className="px-6 py-4 text-left font-semibold">Technologies</th>
+                                            <th className="px-6 py-4 text-left font-semibold hide-on-mobile">End Date</th>
+                                            <th className="px-6 py-4 text-left font-semibold hide-on-mobile">Technologies</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y-2 divide-[#C9A875]">
                                         {projects.map((project, index) => (
-                                        <motion.tr
-                                            key={project.id}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                                            className="hover:bg-[#F5E6D3] transition-colors"
-                                        >
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="w-2 h-2 bg-[#DC143C] rounded-full flex-shrink-0"></div>
-                                                    <span className="font-medium text-[#3D2817]">{project.name}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {project.codeUrl && project.codeUrl !== '#' ? (
-                                                    <a
-                                                        href={project.codeUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
-                                                    >
-                                                        <Github size={16} />
-                                                        <span className="text-sm">View</span>
-                                                    </a>
-                                                ) : (
-                                                    <span className="text-[#6B5644] text-sm">—</span>
-                                                )}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {project.demoUrl && project.demoUrl !== '#' ? (
-                                                    <a
-                                                        href={project.demoUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
-                                                    >
-                                                        <ExternalLink size={16} />
-                                                        <span className="text-sm">View</span>
-                                                    </a>
-                                                ) : (
-                                                    <span className="text-[#6B5644] text-sm">—</span>
-                                                )}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <span className="text-[#5C4033]">{project.endDate}</span>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex flex-wrap gap-2">
-                                                    {project.technologies.map((tech, techIndex) => (
-                                                        <span
-                                                            key={techIndex}
-                                                            className="px-4 py-1 text-xs bg-[#DC143C]/10 text-[#DC143C] rounded border border-[#DC143C]/30"
+                                            <motion.tr
+                                                key={project.id}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 0.4, delay: index * 0.05 }}
+                                                className="hover:bg-[#F5E6D3] transition-colors"
+                                            >
+                                                <td className="px-6 py-4">
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-2 h-2 bg-[#DC143C] rounded-full flex-shrink-0"></div>
+                                                        <span className="font-medium text-[#3D2817]">{project.name}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    {project.codeUrl && project.codeUrl !== '#' ? (
+                                                        <a
+                                                            href={project.codeUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
                                                         >
-                                                            {tech}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </td>
-                                        </motion.tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                                            <Github size={16} />
+                                                            <span className="text-sm">View</span>
+                                                        </a>
+                                                    ) : (
+                                                        <span className="text-[#6B5644] text-sm">—</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    {project.demoUrl && project.demoUrl !== '#' ? (
+                                                        <a
+                                                            href={project.demoUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="inline-flex items-center gap-1 text-[#DC143C] hover:text-[#B01030] transition-colors"
+                                                        >
+                                                            <ExternalLink size={16} />
+                                                            <span className="text-sm">View</span>
+                                                        </a>
+                                                    ) : (
+                                                        <span className="text-[#6B5644] text-sm">—</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-6 py-4 hide-on-mobile">
+                                                    <span className="text-[#5C4033]">{project.endDate}</span>
+                                                </td>
+                                                <td className="px-6 py-4 hide-on-mobile">
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {project.technologies.map((tech, techIndex) => (
+                                                            <span
+                                                                key={techIndex}
+                                                                className="px-4 py-1 text-xs bg-[#DC143C]/10 text-[#DC143C] rounded border border-[#DC143C]/30"
+                                                            >
+                                                                {tech}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </td>
+                                            </motion.tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         )}
                     </div>
                 </AnimatedSection>
