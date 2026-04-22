@@ -176,7 +176,7 @@ export function Hero() {
             </motion.button>
 
             <motion.a
-              href="https://flowcv.com/resume/u7ft67f0vt27"
+              href="https://drive.google.com/file/d/163VS5FniNkM3sljwxx8USQI9-wg8FYWs/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-[#EDE0D4] hover:bg-[#C9A875] text-[#3D2817] rounded transition-colors border-2 border-[#C9A875] hover:border-[#DC143C] shadow-lg"
