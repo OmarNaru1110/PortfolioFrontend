@@ -174,7 +174,7 @@ export function Hero() {
                 <MoveDown size={20} />
               </motion.div>
             </motion.button>
-
+            {/* Resume Button */}
             <motion.a
               href="https://drive.google.com/file/d/163VS5FniNkM3sljwxx8USQI9-wg8FYWs/view?usp=sharing"
               target="_blank"
