@@ -1,0 +1,23 @@
+---
+interface Props {
+  id: string;
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  description: string;
+}
+
+const { id, role, company, period, location, description } = Astro.props;
+---
+
+<article class="detail-view hidden-state" id={`view-${id}`}>
+  <div class="max-w-xl space-y-5">
+    <header>
+      <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-600 font-medium mb-1.5">Experience — {period}</div>
+      <h3 class="text-3xl font-semibold tracking-tight text-zinc-950 leading-snug">{role}</h3>
+      <div class="text-xs text-zinc-600 font-mono mt-1">{company} · {location}</div>
+    </header>
+    <p class="text-base text-zinc-700 leading-[1.65]">{description}</p>
+  </div>
+</article>

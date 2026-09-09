@@ -1,0 +1,217 @@
+---
+import { aboutItems, experienceItems, projectItems, writingItems } from '../data/content';
+---
+
+<!-- Mobile / Tablet stacked layout -->
+<div class="lg:hidden max-w-xl mx-auto w-full flex flex-col gap-10 md:gap-12 pb-2">
+  <header class="sticky top-6 sm:top-10 md:top-14 z-40 bg-[#fbf9f9]/90 supports-[backdrop-filter]:bg-[#fbf9f9]/60 backdrop-blur-md py-2.5 px-3 rounded-full border border-zinc-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex items-center justify-center">
+    <nav aria-label="Quick jump links" class="flex items-center gap-1 sm:gap-2 text-[13px] font-mono text-zinc-600 justify-center">
+      <a class="hover:text-zinc-950 transition-colors px-1 py-1" href="#about">about</a>
+      <a class="hover:text-zinc-950 transition-colors px-1 py-1" href="#experience">experience</a>
+      <a class="hover:text-zinc-950 transition-colors px-1 py-1" href="#projects">projects</a>
+      <a class="hover:text-zinc-950 transition-colors px-1 py-1" href="#writing">writing</a>
+    </nav>
+  </header>
+
+  <!-- About / Hero -->
+  <section class="pt-2 pb-6 border-b border-zinc-200/80 flex flex-col justify-between min-h-[58vh] sm:min-h-[52vh]" id="about">
+    <div class="space-y-6 sm:space-y-8">
+      <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight leading-snug text-zinc-950">
+        Omar Elnaggar, <span class="font-normal text-zinc-600">backend software engineer <span class="text-[#4f46e5] font-normal">building robust, dynamic and efficient backend systems.</span></span>
+      </h1>
+      <p class="text-[15px] sm:text-base text-zinc-700 leading-[1.65] font-normal max-w-lg">
+        I specialize in building high-performance backend services, DNS infrastructure, and real-time systems. Focused on crafting scalable, well-architected solutions that are both reliable and efficient.
+      </p>
+    </div>
+    <div class="pt-10 space-y-3" id="contacts">
+      <div class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium">contacts</div>
+      <div class="flex flex-wrap gap-y-2 gap-x-4 text-sm font-medium text-[#0f172a]">
+        <a class="hover:text-black transition-colors underline underline-offset-4 decoration-1 decoration-zinc-300" href="mailto:omarnaru2002@gmail.com">Email</a>
+        <a class="hover:text-black transition-colors underline underline-offset-4 decoration-1 decoration-zinc-300" href="https://github.com/OmarNaru1110" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a class="hover:text-black transition-colors underline underline-offset-4 decoration-1 decoration-zinc-300" href="https://drive.google.com/file/d/163VS5FniNkM3sljwxx8USQI9-wg8FYWs/view?usp=sharing" rel="noopener noreferrer" target="_blank">Resume</a>
+        <a class="hover:text-black transition-colors underline underline-offset-4 decoration-1 decoration-zinc-300" href="https://x.com/OmarNaru1110" rel="noopener noreferrer" target="_blank">X</a>
+        <a class="hover:text-black transition-colors underline underline-offset-4 decoration-1 decoration-zinc-300" href="https://www.linkedin.com/in/omarnaru" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="py-4 border-b border-zinc-200/80" id="experience">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium">experience</h2>
+      <span class="font-mono text-[11px] text-zinc-600/80">Tap row for details</span>
+    </div>
+    <div class="divide-y divide-zinc-200/70">
+      {experienceItems.map(item => (
+        <article class="accordion-item py-4 group" data-open="false" data-accordion>
+          <button type="button" data-accordion-toggle aria-expanded="false" class="w-full text-left flex items-baseline justify-between gap-3">
+            <div class="flex-1">
+              <div class="text-[15px] font-medium text-zinc-950 leading-snug">
+                {item.title}
+              </div>
+            </div>
+            <div class="flex items-center gap-2 font-mono text-xs text-zinc-600 shrink-0">
+              <span>{item.period}</span>
+              <svg class="chevron-icon w-3.5 h-3.5 text-zinc-600/70 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="overflow-hidden pt-2 pb-1 text-sm leading-relaxed text-zinc-700">
+              <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-600 mb-1.5">{item.company} · {item.location}</div>
+              <p class="border-l border-[#4f46e5]/40 pl-2">{item.description}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="py-4 border-b border-zinc-200/80" id="projects">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium">projects</h2>
+      <span class="font-mono text-[11px] text-zinc-600/80">Selected Works</span>
+    </div>
+    <div class="space-y-4">
+      {projectItems.map(item => (
+        <article class="block p-4 rounded-lg bg-white/50 border border-zinc-200/80">
+          <div class="flex items-baseline justify-between mb-1.5 gap-3">
+            <h3 class="text-[15px] font-medium text-zinc-950">{item.title}
+              <span class="text-zinc-600 font-normal text-xs font-mono"> {item.subtitle}</span>
+            </h3>
+            <span class="font-mono text-xs text-zinc-600 shrink-0 whitespace-nowrap">{item.date}</span>
+          </div>
+          <p class="text-sm text-zinc-700 leading-[1.65]">{item.description}</p>
+          <div class="pt-3 flex flex-wrap gap-2 text-[11px] font-mono text-zinc-600">
+            {item.tags.map(tag => (
+              <span class="px-2 py-0.5 border border-zinc-300/80 bg-white/40 rounded-full">{tag}</span>
+            ))}
+          </div>
+          <div class="border-t border-zinc-200/60 mt-3 pt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-[#0f172a]">
+            {item.codeHref && (
+              <a class="underline underline-offset-4 decoration-1 decoration-zinc-300 hover:decoration-zinc-950 transition-colors" href={item.codeHref} rel="noopener noreferrer" target="_blank">Code →</a>
+            )}
+            {item.demoHref && (
+              <a class="underline underline-offset-4 decoration-1 decoration-zinc-300 hover:decoration-zinc-950 transition-colors" href={item.demoHref} rel="noopener noreferrer" target="_blank">Demo →</a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section class="pt-4" id="writing">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium">writing</h2>
+      <span class="font-mono text-[11px] text-zinc-600/80">Essays &amp; Notes</span>
+    </div>
+    <div class="divide-y divide-zinc-200/70">
+      {writingItems.map(item => (
+        <a class="py-3.5 flex flex-col gap-1.5 group w-full" href={item.url} rel="noopener noreferrer" target="_blank">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="text-[15px] text-zinc-950 group-hover:text-[#4f46e5] transition-colors leading-snug">{item.title}</span>
+            <span class="font-mono text-xs text-zinc-600 shrink-0 whitespace-nowrap pl-4">{item.date}</span>
+          </div>
+          <p class="text-sm text-zinc-600 leading-[1.6]">{item.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</div>
+
+<!-- Desktop index rail -->
+<aside class="hidden lg:flex lg:col-span-5 flex-col space-y-11 lg:space-y-12 interactive-list">
+  <!-- About Section -->
+  <section>
+    <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium mb-4 select-none">
+      about
+    </h2>
+    <ul class="space-y-2.5 text-sm" role="list">
+      {aboutItems.map(item => (
+        <li class="interactive-item cursor-pointer flex items-baseline justify-between py-0.5 group" data-item-id={item.id}>
+          <span class="text-[#0f172a] font-medium group-hover:text-black transition-colors flex items-center item-title">
+            {item.title}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Experience Section -->
+  <section>
+    <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium mb-4 select-none">
+      experience
+    </h2>
+    <ul class="space-y-2.5 text-sm" role="list">
+      {experienceItems.map(item => (
+        <li class="interactive-item cursor-pointer flex items-baseline justify-between py-0.5 group" data-item-id={item.id}>
+          <span class="text-[#0f172a] font-medium group-hover:text-black transition-colors flex items-center item-title">
+            {item.title} <span class="text-zinc-600 font-normal ml-1.5">— {item.company}</span>
+          </span>
+          <span class="text-zinc-600 item-date tabular font-mono text-xs whitespace-nowrap pl-4">{item.period}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Projects Section -->
+  <section>
+    <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium mb-4 select-none">
+      projects
+    </h2>
+    <ul class="space-y-2.5 text-sm" role="list">
+      {projectItems.map(item => (
+        <li class="interactive-item cursor-pointer flex items-baseline justify-between py-0.5 group" data-item-id={item.id}>
+          <span class="text-[#0f172a] font-medium group-hover:text-black transition-colors flex items-center item-title">
+            {item.title}
+          </span>
+          {item.date && <span class="text-zinc-600 item-date tabular font-mono text-xs whitespace-nowrap pl-4">{item.date}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Writing Section -->
+  <section>
+    <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-zinc-600 font-medium mb-4 select-none">
+      writing
+    </h2>
+    <ul class="space-y-2.5 text-sm" role="list">
+      {writingItems.map(item => (
+        <li class="interactive-item cursor-pointer flex items-baseline justify-between py-0.5 group" data-item-id={item.id}>
+          <span class="text-[#0f172a] font-medium group-hover:text-black transition-colors flex items-center item-title">
+            {item.title}
+          </span>
+          {item.date && <span class="text-zinc-600 item-date tabular font-mono text-xs whitespace-nowrap pl-4">{item.date}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+</aside>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('[data-accordion]');
+    const toggles = document.querySelectorAll('[data-accordion-toggle]');
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const item = toggle.closest('[data-accordion]');
+        if (!item) return;
+        const isOpen = item.getAttribute('data-open') === 'true';
+
+        items.forEach(other => {
+          other.setAttribute('data-open', 'false');
+          const btn = other.querySelector('[data-accordion-toggle]');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+
+        item.setAttribute('data-open', String(!isOpen));
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+  });
+</script>

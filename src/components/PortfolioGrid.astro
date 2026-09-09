@@ -1,0 +1,64 @@
+---
+import LeftCatalog from './LeftCatalog.astro';
+import RightInspectionPanel from './RightInspectionPanel.astro';
+---
+
+<main class="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-24 relative items-start">
+  <LeftCatalog />
+  <RightInspectionPanel />
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const allDetailViews = document.querySelectorAll('.detail-view');
+    const listItems = document.querySelectorAll('[data-item-id]');
+    
+    let activeItemId = 'default';
+    let currentViewId = 'view-default';
+
+    function updateItemActiveStyles(currentId: string) {
+      listItems.forEach(item => {
+        const id = item.getAttribute('data-item-id');
+        if (id === currentId) {
+          item.classList.add('is-active');
+        } else {
+          item.classList.remove('is-active');
+        }
+      });
+    }
+
+    function switchDetail(targetId: string, sourceItemId: string) {
+      if (targetId === currentViewId && sourceItemId === activeItemId) return;
+
+      activeItemId = sourceItemId;
+      currentViewId = targetId;
+      updateItemActiveStyles(sourceItemId);
+
+      allDetailViews.forEach(view => {
+        if (view.id === targetId) {
+          view.classList.remove('hidden-state');
+          view.classList.add('visible-state');
+        } else if (view.classList.contains('visible-state')) {
+          view.classList.remove('visible-state');
+          view.classList.add('hidden-state');
+        }
+      });
+    }
+
+    listItems.forEach(item => {
+      const itemId = item.getAttribute('data-item-id');
+      const viewId = itemId === 'default' ? 'view-default' : `view-${itemId}`;
+
+      item.addEventListener('mouseenter', () => {
+        switchDetail(viewId, itemId!);
+      });
+
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchDetail(viewId, itemId!);
+      });
+    });
+
+    updateItemActiveStyles('default');
+  });
+</script>

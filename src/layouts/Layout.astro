@@ -1,0 +1,157 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="Omar Elnaggar — Backend Software Engineer" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen selection:bg-neutral-900 selection:text-white flex flex-col justify-between p-6 sm:p-10 md:p-14 lg:p-20 text-[#18181b]">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import "tailwindcss";
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      scroll-padding-top: 6rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 7rem;
+    }
+  }
+
+  body {
+    background-color: #fbf9f9;
+    color: #18181b;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .interactive-list .interactive-item {
+    opacity: 0.58;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .interactive-list .interactive-item:hover,
+  .interactive-list .interactive-item.is-active {
+    opacity: 1 !important;
+    transform: translateX(2px);
+  }
+
+  .interactive-item.is-active .item-title {
+    color: #0f172a !important;
+    font-weight: 600;
+  }
+
+  .interactive-item.is-active .item-date {
+    color: #18181b !important;
+    font-weight: 500;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease;
+    opacity: 0;
+  }
+
+  .accordion-item[data-open="true"] .accordion-content {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .accordion-item[data-open="true"] .chevron-icon {
+    transform: rotate(90deg);
+  }
+
+  .detail-view-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .detail-view {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 200ms;
+    will-change: opacity, transform;
+  }
+
+  .detail-view.visible-state {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 0s;
+  }
+
+  .detail-view.hidden-state {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  @keyframes auroraFloat1 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -25px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.96); }
+  }
+
+  @keyframes auroraFloat2 {
+    0%, 100% { transform: translate(0px, 0px) scale(0.98); }
+    40% { transform: translate(-35px, 20px) scale(1.04); }
+    75% { transform: translate(25px, -30px) scale(0.95); }
+  }
+
+  @keyframes auroraFloat3 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(25px, 35px) scale(1.05); }
+    80% { transform: translate(-25px, -15px) scale(0.97); }
+  }
+
+  .aurora-blob-1 {
+    animation: auroraFloat1 28s ease-in-out infinite alternate;
+  }
+
+  .aurora-blob-2 {
+    animation: auroraFloat2 32s ease-in-out infinite alternate;
+  }
+
+  .aurora-blob-3 {
+    animation: auroraFloat3 25s ease-in-out infinite alternate;
+  }
+</style>
