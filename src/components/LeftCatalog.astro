@@ -77,12 +77,11 @@ import { aboutItems, experienceItems, projectItems, writingItems } from '../data
     <div class="space-y-4">
       {projectItems.map(item => (
         <article class="block p-4 rounded-lg bg-white/50 border border-zinc-200/80">
-          <div class="flex items-baseline justify-between mb-1.5 gap-3">
-            <h3 class="text-[15px] font-medium text-zinc-950">{item.title}
-              <span class="text-zinc-600 font-normal text-xs font-mono"> {item.subtitle}</span>
-            </h3>
+          <div class="flex items-baseline justify-between mb-0.5 gap-3">
+            <h3 class="text-[15px] font-medium text-zinc-950">{item.title}</h3>
             <span class="font-mono text-xs text-zinc-600 shrink-0 whitespace-nowrap">{item.date}</span>
           </div>
+          <p class="text-xs font-mono text-zinc-600 mb-1.5">{item.subtitle}</p>
           <p class="text-sm text-zinc-700 leading-[1.65]">{item.description}</p>
           <div class="pt-3 flex flex-wrap gap-2 text-[11px] font-mono text-zinc-600">
             {item.tags.map(tag => (

@@ -56,7 +56,7 @@ export const projectItems: ProjectItem[] = [
     date: '2025',
     subtitle: 'Lightweight desktop GUI for yt-dlp',
     description:
-      'byto is a lightweight desktop application that provides a clean and intuitive GUI for yt-dlp. It simplifies media downloading by offering an easy-to-use interface, smart defaults, and direct link handling without the need for command-line knowledge. byto focuses on speed, clarity, and user convenience, making advanced downloading accessible to everyone while keeping the experience smooth, modern, and reliable.',
+      'byto is a lightweight desktop application that provides a clean and intuitive GUI for yt-dlp. It simplifies media downloading by offering an easy-to-use interface, smart defaults, and direct link handling without the need for command-line knowledge. byto focuses on speed, clarity, and user convenience, making advanced downloading accessible to everyone while keeping the experience smooth, modern, and reliable. The project has reached 1,000+ downloads and has attracted multiple contributors, making it an actively evolving open-source project.',
     tags: ['Go', 'Vue', 'React', 'ASP.NET Core Web API', 'yt-dlp'],
     codeHref: 'https://github.com/OmarNaru1110/byto',
     demoHref: 'https://byto.online/'
