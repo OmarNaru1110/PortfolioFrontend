@@ -73,16 +73,6 @@ export const projectItems: ProjectItem[] = [
     demoHref: 'https://ainaa.mafazaa.com/'
   },
   {
-    id: 'proj-elearning',
-    title: 'E-Learning',
-    date: '2025',
-    subtitle: 'Real-time language learning platform',
-    description:
-      'E-Learning is a real-time language learning platform that connects users for collaborative practice through structured sessions and instant messaging. It features interest-based matching, WebSocket and WebRTC communication, and feedback systems to ensure an engaging and effective learning experience.',
-    tags: ['ASP.NET Core Web API', 'EF Core', 'SQL Server', 'SignalR', 'WebRTC'],
-    codeHref: 'https://github.com/E-Learning-Application'
-  },
-  {
     id: 'proj-aggar',
     title: 'Aggar',
     date: '2024',
@@ -103,6 +93,16 @@ export const projectItems: ProjectItem[] = [
     tags: ['ASP.NET Core Web API', 'EF Core', 'SQL Server', 'SignalR', 'Dapper', 'Worker Services'],
     codeHref: 'https://github.com/Yaqra',
     demoHref: 'https://drive.google.com/file/d/1EBKqUySOXieF3XiOTuNxCxkRc5eypNEW/view'
+  },
+  {
+    id: 'proj-elearning',
+    title: 'E-Learning',
+    date: '2025',
+    subtitle: 'Real-time language learning platform',
+    description:
+      'E-Learning is a real-time language learning platform that connects users for collaborative practice through structured sessions and instant messaging. It features interest-based matching, WebSocket and WebRTC communication, and feedback systems to ensure an engaging and effective learning experience.',
+    tags: ['ASP.NET Core Web API', 'EF Core', 'SQL Server', 'SignalR', 'WebRTC'],
+    codeHref: 'https://github.com/E-Learning-Application'
   }
 ];
 
