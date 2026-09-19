@@ -39,8 +39,8 @@ export const aboutItems: AboutItem[] = [
 export const experienceItems: ExperienceItem[] = [
   {
     id: 'exp-mafazaa',
-    title: 'Backend Software Engineer (Volunteer)',
-    role: 'Backend Software Engineer (Volunteer)',
+    title: 'Backend Software Engineer',
+    role: 'Backend Software Engineer',
     company: 'Mafazaa',
     period: '2025 — 2025',
     location: 'Remote',
