@@ -69,8 +69,7 @@ export const projectItems: ProjectItem[] = [
     description:
       'AinaaDNS is a privacy-focused DNS service that filters harmful and adult content at the domain level. Built on CoreDNS with custom Go plugins, it delivers fast, adaptive resolution, multi-tier protection and seamless integration with admin tools, providing safe, reliable internet access at scale.',
     tags: ['Go', 'DynamoDB', 'Redis', 'DNS'],
-    codeHref: 'https://github.com/OmarNaru1110/coredns-ainaa',
-    demoHref: 'https://ainaa.mafazaa.com/'
+    codeHref: 'https://github.com/OmarNaru1110/coredns-ainaa'
   },
   {
     id: 'proj-aggar',
