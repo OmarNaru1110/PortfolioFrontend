@@ -165,7 +165,7 @@ import { aboutItems, experienceItems, projectItems, writingItems } from '../data
       {projectItems.map(item => (
         <li class="interactive-item cursor-pointer flex items-baseline justify-between py-0.5 group" data-item-id={item.id}>
           <span class="text-[#0f172a] font-medium group-hover:text-black transition-colors flex items-center item-title">
-            {item.title}
+            {item.title} <span class="text-zinc-600 font-normal ml-1.5">— {item.subtitle}</span>
           </span>
           {item.date && <span class="text-zinc-600 item-date tabular font-mono text-xs whitespace-nowrap pl-4">{item.date}</span>}
         </li>
