@@ -52,11 +52,11 @@ export const experienceItems: ExperienceItem[] = [
 export const projectItems: ProjectItem[] = [
   {
     id: 'proj-byto',
-    title: 'byto',
+    title: 'Byto',
     date: '2025',
     subtitle: 'Lightweight desktop GUI for yt-dlp',
     description:
-      'byto is a lightweight desktop application that provides a clean and intuitive GUI for yt-dlp. It simplifies media downloading by offering an easy-to-use interface, smart defaults, and direct link handling without the need for command-line knowledge. byto focuses on speed, clarity, and user convenience, making advanced downloading accessible to everyone while keeping the experience smooth, modern, and reliable. The project has reached 1,000+ downloads and has attracted multiple contributors, making it an actively evolving open-source project.',
+      'Byto is a lightweight desktop application that provides a clean and intuitive GUI for yt-dlp. It simplifies media downloading by offering an easy-to-use interface, smart defaults, and direct link handling without the need for command-line knowledge. Byto focuses on speed, clarity, and user convenience, making advanced downloading accessible to everyone while keeping the experience smooth, modern, and reliable. The project has reached 1,000+ downloads and has attracted multiple contributors, making it an actively evolving open-source project.',
     tags: ['Go', 'Vue', 'React', 'ASP.NET Core Web API', 'yt-dlp'],
     codeHref: 'https://github.com/OmarNaru1110/byto',
     demoHref: 'https://byto.online/'
@@ -84,11 +84,11 @@ export const projectItems: ProjectItem[] = [
   },
   {
     id: 'proj-byteless',
-    title: 'byteless',
+    title: 'Byteless',
     date: '2026',
     subtitle: 'Precise video compression desktop app',
     description:
-      'byteless is a lightweight desktop application that simplifies video compression by letting users specify exactly how large they want the output file to be. It uses FFmpeg two-pass encoding to calculate the required bitrate and produce a video that closely matches the target size while preserving as much quality as possible. It supports H.264 and H.265 encoding, real-time progress tracking, drag-and-drop input, automatic FFmpeg/FFprobe discovery, and clean cancellation. The project focuses on making precise video compression accessible without requiring users to understand bitrate calculations or command-line tools.',
+      'Byteless is a lightweight desktop application that simplifies video compression by letting users specify exactly how large they want the output file to be. It uses FFmpeg two-pass encoding to calculate the required bitrate and produce a video that closely matches the target size while preserving as much quality as possible. It supports H.264 and H.265 encoding, real-time progress tracking, drag-and-drop input, automatic FFmpeg/FFprobe discovery, and clean cancellation. The project focuses on making precise video compression accessible without requiring users to understand bitrate calculations or command-line tools.',
     tags: ['Go', 'React', 'TypeScript', 'Wails', 'FFmpeg'],
     codeHref: 'https://github.com/OmarNaru1110/byteless',
     demoHref: 'https://github.com/OmarNaru1110/byteless/releases/latest'
@@ -106,11 +106,11 @@ export const projectItems: ProjectItem[] = [
   },
   {
     id: 'proj-elearning',
-    title: 'E-Learning',
+    title: 'ELearning',
     date: '2025',
     subtitle: 'Real-time language learning platform',
     description:
-      'E-Learning is a real-time language learning platform that connects users for collaborative practice through structured sessions and instant messaging. It features interest-based matching, WebSocket and WebRTC communication, and feedback systems to ensure an engaging and effective learning experience.',
+      'ELearning is a real-time language learning platform that connects users for collaborative practice through structured sessions and instant messaging. It features interest-based matching, WebSocket and WebRTC communication, and feedback systems to ensure an engaging and effective learning experience.',
     tags: ['ASP.NET Core Web API', 'EF Core', 'SQL Server', 'SignalR', 'WebRTC'],
     codeHref: 'https://github.com/E-Learning-Application'
   }
