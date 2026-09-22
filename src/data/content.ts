@@ -83,6 +83,17 @@ export const projectItems: ProjectItem[] = [
     demoHref: 'https://drive.google.com/file/d/1_2l2ve63Zk_gnS7YvD_0qFqXAELZ2JS4/view'
   },
   {
+    id: 'proj-byteless',
+    title: 'byteless',
+    date: '2026',
+    subtitle: 'Precise video compression desktop app',
+    description:
+      'byteless is a lightweight desktop application that simplifies video compression by letting users specify exactly how large they want the output file to be. It uses FFmpeg two-pass encoding to calculate the required bitrate and produce a video that closely matches the target size while preserving as much quality as possible. It supports H.264 and H.265 encoding, real-time progress tracking, drag-and-drop input, automatic FFmpeg/FFprobe discovery, and clean cancellation. The project focuses on making precise video compression accessible without requiring users to understand bitrate calculations or command-line tools.',
+    tags: ['Go', 'React', 'TypeScript', 'Wails', 'FFmpeg'],
+    codeHref: 'https://github.com/OmarNaru1110/byteless',
+    demoHref: 'https://github.com/OmarNaru1110/byteless/releases/latest'
+  },
+  {
     id: 'proj-yaqra',
     title: 'Yaqra',
     date: '2024',
