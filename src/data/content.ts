@@ -118,6 +118,14 @@ export const projectItems: ProjectItem[] = [
 
 export const writingItems: WritingItem[] = [
   {
+    id: 'writing-saga',
+    title: 'Saga Pattern: Why Database Transactions Are Not Enough',
+    date: '2026',
+    description:
+      'An introduction to the Saga Pattern, explaining why traditional database transactions are not enough when dealing with distributed transactions in microservices. The article explores how Sagas break a business process into smaller sub-transactions, different recovery strategies, and how Choreographed Sagas handle distributed workflows.',
+    url: 'https://www.linkedin.com/pulse/saga-pattern-لما-الـdatabase-transaction-تكون-مش-كفاية-omar-elnaggar-psjfe/'
+  },
+  {
     id: 'writing-di',
     title: 'Dependency Injection: What, Why and How?',
     date: '2026',
